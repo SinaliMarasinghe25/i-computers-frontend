@@ -1,15 +1,19 @@
 import { useState } from 'react'
 
 import './App.css';
-import Test from './components/test';
-import { BrowserRouter } from 'react-router-dom';
+import HomePage from './pages/homePage';
+import AdminPage from './pages/adminPage';
+import LoginPage from './pages/loginPage';
+import RegisterPage from './pages/registerPage';
+import Header from './components/header';
+import { BrowserRouter, Routes,Route} from 'react-router-dom';
 function App() {
   
 
   return (
 
     <BrowserRouter>
-    <div className="w-full h-screen bg-red-400">
+    <div className="w-full h-screen bg-primary text-secondary">
     <Routes path="/">
         <Route path="/" element={<HomePage/>}/>
         <Route path="/admin" element={<AdminPage/>}/>
