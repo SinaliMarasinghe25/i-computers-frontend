@@ -14,7 +14,7 @@ export default function AdminAddProductPage(){
     const [price , setPrice]= useState(0);
     const [labelledPrice , setLabelledPrice]= useState(0);
     const [images , setImages]= useState("");
-    const [category , setCategory]= useState("");
+    const [category , setCategory]= useState("CPU");
     const [brand , setBrand]= useState("");
     const [model , setModel]= useState("");
     const [stock , setStock]= useState(0);
@@ -40,15 +40,15 @@ export default function AdminAddProductPage(){
         try{
 
             const altNamesInArray= altNames.split(",")
-            const imagesInArray= imagesInArray.split(",")
-            await axios.post ( import.meta.env.VITE_BACKEND_URL + "/products/add",{
+            const imagesInArray= images.split(",")
+            await axios.post ( import.meta.env.VITE_BACKEND_URL + "/products",{
                 productID: productID,
                 name: name,
                 altNames: altNamesInArray,
                 description: description,
                 price: price,
                 labelledPrice: labelledPrice,
-                images: imagesInArraymages,
+                images: imagesInArray,
                 category: category,
                 brand: brand,
                 model: model,
@@ -56,7 +56,8 @@ export default function AdminAddProductPage(){
                 isAvailable: isAvailable,
             },{ 
                      headers: {
-                        Authorization : "Bearer"+ token
+                        Authorization:"Bearer "+token
+
                      }
                     })
                     toast.success("Product added successfully!");

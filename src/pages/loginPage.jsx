@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -52,7 +53,7 @@ export default function LoginPage() {
 
 return(
         
-           <div className="w-full h-screen bg-[url('/bg.jpg')] bg-center bg-cove bg-no-repeat flex">
+           <div className="w-full h-screen bg-[url('/bg.jpg')] bg-center bg-cover bg-no-repeat flex">
                 <div className="w-[50%] h-full flex justify-center items-center flex-col">
                     <img src="/logo.png" alt="logo" className="w-[200px] h-[200px] mt-20 object-cover"></img>
 
@@ -75,7 +76,7 @@ return(
                     
                         
                         
-                        type="email" placeholder="your email" className="w-full h-1 mt-1.5 rounded-lg border-accent p-10 text-[20px] focus:outline-none focus:ring-2 focus:ring-accent text-white"></input>
+                        type="email" placeholder="your email" className="w-full h-[30px] mt-1.5 rounded-lg border-2 border-accent p-10 text-[20px] focus:outline-none focus:ring-2 focus:ring-accent text-white"></input>
 
                         <input 
 
@@ -86,14 +87,14 @@ return(
                         }
                     
                     
-                        type="password" placeholder="your password" className="w-full h-[50px] mt-5 rounded-lg border-accent p-10 text-[20px] text-white focus:outline-none focus:ring-2 focus:ring-accent"></input>
+                        type="password" placeholder="your password" className="w-full h-[30px] mt-5 border-2 rounded-lg border-accent p-10 text-[20px] text-white focus:outline-none focus:ring-2 focus:ring-accent"></input>
                             
-                            <p className="text-white not italic w-full mb-20 mt-1 text-right">
+                            <p className="text-white not italic w-full mb-20 mt-1 text-right text right">
                                 Forget your password ? <Link to="/forget password" className="text-white"> 
                                 Reset it here</Link>
                                 </p>
 
-                        <button onClick={login} className="w-full h-[50px] bg-accent text-black rounded mt-0.5 border-2 border-accent hover:bg-transparent hover:text-accent">Login</button>
+                        <button onClick={login} className="w-[85%] h-[50px] bg-accent text-black rounded mt-0.5 border-2 border-accent hover:bg-transparent hover:text-accent">Login</button>
 
                         <p className="text-white not italic mt-1">Don't have an account ?<Link to="/register" className="text-white italic"> Register here</Link></p>
                     
