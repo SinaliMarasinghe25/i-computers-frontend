@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { BiPlus } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Loader from "../../components/loader";
+import ProductDeleteButton from "../../components/productDeleteButton";
 
 export default function AdminProductsPage() {
  const [products, setProducts] = useState([]);
@@ -84,30 +84,7 @@ export default function AdminProductsPage() {
 
                             <td className="py-2 px-2">
                                 <div className="inline flex items-center gap-2">
-                                    <button
-                                        onClick={() => {
-                                            const token = localStorage.getItem("token");
-                    
-                                            axios.delete(
-                                                import.meta.env.VITE_BACKEND_URL +
-                                                    "/products/" +
-                                                    item.productID , {
-                                                        headers : {
-                                                           Authorization: `Bearer ${token}`
-
-                                                        }
-                                                    }).then(
-                                                        ()=>{ 
-                                                            toast.success("Product deleted successfully");
-                                                            setLoaded(false);
-                                                        }
-                                                    )
-                                                }
-                                        }
-                                        className="w-[80px] bg-red-600 flex justify-center items-center text-white p-2 rounded-lg opacity-60 text-[12px] cursor-pointer hover:bg-red-400"
-                                    >
-                                        Delete
-                                    </button>
+                                    <ProductDeleteButton productId={item.productID} reload={()=>{setLoaded(false)}} />
                                 </div>
                             </td>
                         </tr>

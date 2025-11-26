@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
 import toast from "react-hot-toast";
 import axios from "axios";
-
+import uploadFile from "../../utils/mediaUpload";
 
 export default function AdminAddProductPage(){
 
@@ -13,7 +13,7 @@ export default function AdminAddProductPage(){
     const [description , setDescription]= useState("");
     const [price , setPrice]= useState(0);
     const [labelledPrice , setLabelledPrice]= useState(0);
-    const [images , setImages]= useState("");
+   const [files, setFiles] = useState([]);
     const [category , setCategory]= useState("CPU");
     const [brand , setBrand]= useState("");
     const [model , setModel]= useState("");
@@ -29,6 +29,27 @@ export default function AdminAddProductPage(){
             return;
         }
 
+        console.log(files);
+
+		const imagePromises = []
+
+	
+		//10
+		for(let i=0; i<files.length; i++){
+
+			const promise = uploadFile(files[i])
+			imagePromises.push(promise);
+
+		}
+
+		const images = await Promise.all(imagePromises).catch((err)=>{
+			toast.error("Error uploading images. Please try again.");
+			console.log("Error uploading images:");
+			console.log(err);
+			return;
+		});
+
+
         if(productID=="" || name==""|| description=="" || category==""|| brand==""|| model==""){
 
         
@@ -40,7 +61,7 @@ export default function AdminAddProductPage(){
         try{
 
             const altNamesInArray= altNames.split(",")
-            const imagesInArray= images.split(",")
+            
             await axios.post ( import.meta.env.VITE_BACKEND_URL + "/products",{
                 productID: productID,
                 name: name,
@@ -48,7 +69,7 @@ export default function AdminAddProductPage(){
                 description: description,
                 price: price,
                 labelledPrice: labelledPrice,
-                images: imagesInArray,
+                images : images,
                 category: category,
                 brand: brand,
                 model: model,
@@ -72,8 +93,8 @@ export default function AdminAddProductPage(){
 
     return(
         
-            <div className="w-full h-full flex justify-center items-start overflow-y-scroll p-[50px] ">
-
+            
+                <div className="w-full flex justify-center p-[50px]">
                 <div className=" bg-accent/60 w-[800px] p-[40px] rounded-xl overflow-y-visible">
                 <h1 className="w-full text-xl text-primary mb-[20px] flex items-center gap-[5px]"><MdAddShoppingCart />Add New Product</h1>
                 <div className="w-full bg-white p-[20px] rounded-2xl">
@@ -119,7 +140,9 @@ export default function AdminAddProductPage(){
 
                     <div className="my-[10px] w-full">
                     <label>Images</label>
-                    <input type="text" value={images} onChange={(e)=>{setImages(e.target.value)}} 
+                    <input type="file" 
+                    multiple={true}
+                     onChange={(e)=>{setFiles(e.target.files);}} 
                     className="w-full h-[40px] focus:outline-none focus:ring-accent  border border-accent shadow-2xl rounded-2xl px-[20px]"></input>
                     </div>
 

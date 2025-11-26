@@ -1,15 +1,15 @@
-import { useState } from 'react'
 
 import './App.css';
 import HomePage from './pages/homePage';
 import AdminPage from './pages/adminPage';
 import LoginPage from './pages/loginPage';
 import RegisterPage from './pages/registerPage';
+import TestPage from "./pages/test";
 
 
-import Header from './components/header';
+
 import { BrowserRouter, Routes,Route} from 'react-router-dom';
-import { ToastBar, Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 function App() {
   
 
@@ -24,7 +24,7 @@ function App() {
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/admin/*" element={<AdminPage/>}/>
-        
+        <Route path="/test" element={<TestPage />} />
     
     </Routes>
     
