@@ -5,6 +5,8 @@ import { PiUsersBold } from "react-icons/pi";
 import { MdOutlineReviews } from "react-icons/md";
 import AdminProductsPage from "./admin/adminProductsPage";
 import AdminAddProductPage from "./admin/adminAddProduct";
+import AdminUpdateProductPage from "./admin/adminUpdateProductPage";
+
 
 export default function AdminPage(){
     return(
@@ -32,6 +34,7 @@ export default function AdminPage(){
                     <Route path ="/users" element={<h1>Users</h1>}/>
                     <Route path ="/reviews" element={<h1>Reviews</h1>}/>
                     <Route path ="/add-product" element={<h1><AdminAddProductPage/></h1>}/>
+                    <Route path="/update-product" element={<AdminUpdateProductPage />} />
                     
                     
                     </Routes>
