@@ -68,7 +68,7 @@ export default function ProductOverview() {
                             <button 
                             onClick={()=>{
                                 navigate("/checkout", { state: [{
-                                    productId: product.productID,
+                                    productID: product.productID,
                                     name: product.name,
                                     price: product.price,
                                     labelledPrice: product.labelledPrice,
