@@ -1,8 +1,9 @@
 export default function Test() {
 
 	return (
-		<div className="w-full h-full  flex flex-col justify-center items-center">
-			
-		</div>
+		<div className="w-full h-full bg-red-900 lg:bg-green-900">
+				
+			</div>
+
 	);
 }
