@@ -1,50 +1,82 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { GrGoogle } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
 
 
 export default function LoginPage() {
     const[email , setEmail] = useState("");
     const[password , setPassword] =useState("");
-    const navigate = useNavigate();//smoother travel across pages
+    const navigate = useNavigate() //smoother travel across pages
+    const [isLoading, setIsLoading] = useState(false);
+	const googleLogin = useGoogleLogin({
+		onSuccess: (response) => { 
+			setIsLoading(true);
+			axios.post(import.meta.env.VITE_BACKEND_URL + "/users/google-login", {
+				token: response.access_token,
+			}).then((res) => {
+				localStorage.setItem("token", res.data.token);
+				if (res.data.role == "admin") {
+					navigate("/admin");
+				} else {
+					navigate("/");
+				}
+				toast.success("Login successful!.");
+				setIsLoading(false);
+			}).catch((err) => {
+				console.log(err);
+			});
+			setIsLoading(false);
+		 },
+		onError: () => { toast.error("Google Login Failed"); },
+		onNonOAuthError: () => { toast.error("Google Login Failed"); },
+	})
 
      async   function login(){
         console.log("login button clicked")
         console.log("Email :" , email );
         console.log(" Password :" , password )
 
+        setIsLoading(true);
 
         try{
-        const res= await axios.post(import.meta.env.VITE_BACKEND_URL + "/users/login" , {
-            email:email,
-        password: password
-    })
+       const res = await axios.post(
+				import.meta.env.VITE_BACKEND_URL + "/users/login",
+				{
+					email: email,
+					password: password,
+				}
+			);
 
-    console.log(res.data.token)
+    console.log(res.data.token);
 
     localStorage.setItem("token",res.data.token);
-    console.log()
+   console.log();
+			if (res.data.role == "admin") {
+				//window.location.href = "/admin";
+				navigate("/admin");
+			} else {
+				//window.location.href = "/";
+				navigate("/");
+			}
 
-    if(res.data.role=="admin"){
+			//alert("Login successful! Welcome back.");
 
-        //window.location.href="/admin";
-        navigate("/admin");
-        
-    }else{
-
-       //window.location.href="/";
-       navigate("/");
-
-    }
-
-    toast.success("Login successful! Welcome back");
+			toast.success("Login successful! Welcome back.");
+			setIsLoading(false);
 
 }catch (err) {
 
-    toast.error("Error during login");
+    //alert("Login failed! Please check your credentials and try again.");
+			toast.error("Login failed! Please check your credentials and try again.");
+    
+
+    
     console.log("Error during login");
     console.log(err);
+    setIsLoading(false);
 }
 
 
@@ -95,7 +127,13 @@ return(
                                 Reset it here</Link>
                                 </p>
 
-                        <button onClick={login} className="w-[85%] h-[50px] bg-accent text-black rounded mt-0.5 border-2 border-accent hover:bg-transparent hover:text-accent">Login</button>
+                        <button onClick={login} className="w-full h-[50px] mb-[20px] bg-accent text-white font-bold text-[20px] rounded-lg border-[2px] border-accent hover:bg-transparent hover:text-accent">
+                            Login
+                            </button>
+
+                            <button onClick={googleLogin} className="w-full h-[50px] bg-accent text-white font-bold text-[20px] rounded-lg border-[2px] border-accent hover:bg-transparent hover:text-accent">
+						Login with <GrGoogle className="inline ml-2 mb-1" />
+					</button>
 
                         <p className="text-white not italic mt-1">Don't have an account ?<Link to="/register" className="text-white italic"> Register here</Link></p>
                     
@@ -105,6 +143,7 @@ return(
                     </div>
 
                 </div>
+                {isLoading && <Loader />}
            </div>
        
 )

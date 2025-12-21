@@ -10,11 +10,13 @@ import TestPage from "./pages/test";
 
 import { BrowserRouter, Routes,Route} from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 function App() {
   
 
   return (
 
+    <GoogleOAuthProvider clientId="609754910210-91bsang2cbnq8gm0p718ngrvnsrj1aim.apps.googleusercontent.com">
     <BrowserRouter>
       <Toaster position='top right'/>
     <div className="w-full h-screen bg-primary text-secondary">
@@ -30,6 +32,7 @@ function App() {
     
     </div>
     </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 }
 
