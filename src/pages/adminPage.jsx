@@ -3,6 +3,9 @@ import { LuClipboardList } from "react-icons/lu";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import { PiUsersBold } from "react-icons/pi";
 import { MdOutlineReviews } from "react-icons/md";
+import { LuBoxes } from "react-icons/lu";
+import { FiUsers } from "react-icons/fi";
+import { MdOutlineRateReview } from "react-icons/md";
 import AdminProductsPage from "./admin/adminProductsPage";
 import AdminAddProductPage from "./admin/adminAddProduct";
 import AdminUpdateProductPage from "./admin/adminUpdateProductPage";
@@ -11,6 +14,8 @@ import AdminOrdersPage from "./admin/adminOrdersPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../components/loader";
+import AdminUsersPage from "./admin/adminUsersPage";
+
 export default function AdminPage() {
     const [user, setUser] = useState(null);
 
@@ -85,7 +90,7 @@ export default function AdminPage() {
 							path="/update-product"
 							element={<AdminUpdateProductPage />}
 						/>
-						<Route path="/users" element={<h1>Users</h1>} />
+						<Route path="/users" element={<AdminUsersPage />} />
 						<Route path="/reviews" element={<h1>Reviews</h1>} />
 					</Routes>
 				</div>

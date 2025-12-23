@@ -6,11 +6,11 @@ import LoginPage from './pages/loginPage';
 import RegisterPage from './pages/registerPage';
 import TestPage from "./pages/test";
 
-
-
 import { BrowserRouter, Routes,Route} from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import ForgetPasswordPage from "./pages/forgetPasswordPage"
+
 function App() {
   
 
@@ -27,6 +27,7 @@ function App() {
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/admin/*" element={<AdminPage/>}/>
         <Route path="/test" element={<TestPage />} />
+        <Route path="/forgot-password" element={<ForgetPasswordPage />} />
     
     </Routes>
     
