@@ -125,7 +125,7 @@ return(
                         type="password" placeholder="your password" className="w-full h-[30px] mt-5 border-2 rounded-lg border-accent p-10 text-[20px] text-white focus:outline-none focus:ring-2 focus:ring-accent"></input>
                             
                             <p className="text-white not italic w-full mb-20 mt-1 text-right text right">
-                                Forget your password ? <Link to="/forget password" className="text-white"> 
+                                Forget your password ? <Link to="/forget-password" className="text-white"> 
                                 Reset it here</Link>
                                 </p>
 

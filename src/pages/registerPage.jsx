@@ -45,7 +45,7 @@ export default function RegisterPage() {
         setIsLoading(true);
 		try {
 			await axios.post(
-				import.meta.env.VITE_BACKEND_URL + "/users/",
+				import.meta.env.VITE_BACKEND_URL + "/users/register",
 				{
 					email: email.trim(),
 					password: password.trim(),
